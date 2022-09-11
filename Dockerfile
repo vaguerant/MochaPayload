@@ -1,8 +1,5 @@
-FROM wiiuenv/devkitppc:20210920
+FROM wiiuenv/devkitppc:20220806
 
-COPY --from=wiiuenv/devkitarm:20210917 $DEVKITPRO/devkitARM $DEVKITPRO/devkitARM
-# RUN dkp-pacman -Syu devkitARM --noconfirm
-
-ENV DEVKITARM=/opt/devkitpro/devkitARM
+COPY --from=wiiuenv/libmocha:20220903 /artifacts $DEVKITPRO
 
 WORKDIR project

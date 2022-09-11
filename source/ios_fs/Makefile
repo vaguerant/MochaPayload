@@ -40,7 +40,7 @@ INCLUDES	:= source
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-CFLAGS	:= -Wall -Wextra -std=gnu11 -Os $(MACHDEP) $(INCLUDE) -fno-builtin
+CFLAGS	:= -Wall -std=gnu11 -Os $(MACHDEP) $(INCLUDE) -Wno-array-bounds -fno-builtin
 
 ASFLAGS	:= $(MACHDEP)
 
@@ -53,7 +53,7 @@ LIBS	:= -lgcc
 # list of directories containing libraries, this must be the top level
 # containing include and lib
 #-------------------------------------------------------------------------------
-LIBDIRS	:=
+LIBDIRS	:= 
 
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
@@ -117,11 +117,11 @@ $(OUTPUT).elf	:	$(OFILES)
 $(OUTPUT).bin: $(OUTPUT).elf
 	@echo "built ... $(notdir $@)"
 	@$(OBJCOPY) -j .text -j .rodata -j .data -O binary $(OUTPUT).elf $@
-
+	
 $(OUTPUT).bin.h: $(OUTPUT).bin
 	@raw2c $<
 	@cp $(TARGETNAME).c $@
-
+	
 $(OUTPUT)_syms.h:
 	@echo "#ifndef $(TARGETNAME)_SYMS_H" > $@
 	@echo "#define $(TARGETNAME)_SYMS_H" >> $@
