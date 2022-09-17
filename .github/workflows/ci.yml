@@ -3,7 +3,7 @@ name: CI-Release
 on:
   push:
     branches:
-      - master
+      - drc_use
     
 jobs:
   clang-format:
